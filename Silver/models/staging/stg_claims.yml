@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_claims
+    description: "FHIR Claim resource – one row per claim"
+
+    columns:
+      - name: claim_id
+        tests:
+          - not_null
+          - unique
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: provider_id
+        tests:
+          - not_null
+
+      - name: service_date
+        tests:
+          - not_null
+
+      - name: appointment_id
+        tests:
+          - not_null
+
+      - name: status_primary
+        tests:
+          - not_null

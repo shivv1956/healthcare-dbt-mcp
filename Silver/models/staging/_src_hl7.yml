@@ -1,0 +1,8 @@
+sources:
+  - name: raw
+    database: SYNTHEA_HOSPITAL
+    schema: RAW_DATA   # exact schema Fivetran used
+    tables:
+      - name: ALLERGIES
+      - name: CAREPLANS
+      - name: CLAIMS

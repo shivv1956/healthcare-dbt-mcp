@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_careplans
+    description: "HL7 CarePlan staging table"
+
+    columns:
+      - name: careplan_id
+        tests:
+          - not_null
+          - unique
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: encounter_id
+        tests:
+          - not_null
+
+      - name: start_date
+        tests:
+          - not_null
+
+      - name: code
+        tests:
+          - not_null
+
+      - name: description
+        tests:
+          - not_null

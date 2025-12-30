@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_alergies
+    description: "Standardized allergy data with UUID and severity validation"
+
+    columns:
+      - name: start_date
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+          
+      - name: CODE
+        tests:
+          - not_null
+
+      - name: system
+        tests:
+          - not_null
+
+      - name: description
+        tests:
+          - not_null
+
+      - name: severity1
+        tests:
+          - accepted_values:
+              values: ['MILD','MODERATE','SEVERE']
+
+      - name: severity2
+        tests:
+          - accepted_values:
+              values: ['MILD','MODERATE','SEVERE']
+
+    tests:
+      - unique_patient_code
+        
