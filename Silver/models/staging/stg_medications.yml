@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_medications
+    description: "staging model for medication table"
+    columns:
+      - name: start_datetime
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      # - name: payer_id
+      #   tests:
+      #     - not_null
+
+      - name: encounter_id
+        tests:
+          - not_null
+
+      # - name: medication_code
+      #   tests:
+      #     - not_null

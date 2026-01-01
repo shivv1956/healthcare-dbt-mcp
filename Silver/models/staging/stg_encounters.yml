@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: stg_encounters
+    description: "HL7 Encounter records with cost and payer details"
+
+    columns:
+      - name: encounter_id
+        tests:
+          - not_null
+          - unique
+
+      - name: start_ts
+        tests:
+          - not_null
+
+      - name: stop_ts
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: organization_id
+        tests:
+          - not_null
+
+      - name: provider_id
+        tests:
+          - not_null
+
+      # - name: payer_id
+      #   tests:
+      #     - not_null
+
+      - name: encounter_class
+        tests:
+          - not_null
+
+      - name: code
+        tests:
+          - not_null
+
+      # - name: base_encounter_cost
+      #   tests:
+      #     - not_null
+
+      # - name: total_claim_cost
+      #   tests:
+      #     - not_null

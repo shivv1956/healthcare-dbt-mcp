@@ -28,4 +28,15 @@ models:
 
       - name: status_primary
         tests:
-          - not_null
+          - accepted_values:
+              values: ['BILLED', 'CLOSED']
+
+      - name: status_secondary
+        tests:
+          - accepted_values:
+              values: ['BILLED', 'CLOSED']
+
+      - name: status_patient
+        tests:
+          - accepted_values:
+              values: ['BILLED', 'CLOSED']

@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_devices
+    description: "HL7 Device associations with UDI tracking"
+
+    columns:
+      - name: start_ts
+        tests:
+          - not_null
+
+      - name: stop_ts
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      # - name: encounter_id
+      #   tests:
+      #     - not_null
+
+      - name: code
+        tests:
+          - not_null
+
+      - name: description
+        tests:
+          - not_null
+
+      - name: udi
+        tests:
+          - not_null

@@ -23,7 +23,7 @@ validated AS (
         "START" AS start_date,
         "STOP"  AS stop_date,
 
-        --validation -- Foreign keys
+        -- Foreign key to the Patient and encounter
         {{ validate_uuid('PATIENT') }}::VARCHAR(36)   AS patient_id,
         {{ validate_uuid('ENCOUNTER') }}::VARCHAR(36) AS encounter_id,
 

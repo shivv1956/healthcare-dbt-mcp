@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_claims_transactions
+    description: "Staging table for claim transactions with validated UUIDs and deduplication."
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+      - name: claim_id
+        tests:
+          - not_null
+      - name: patient_id
+        tests:
+          - not_null
+      - name: provider_id
+        tests:
+          - not_null
+      - name: type
+        tests:
+          - accepted_values:
+              values: ['CHARGE','PAYMENT','ADJUSTMENT','TRANSFERIN','TRANSFEROUT']
+      - name: transfer_type
+        tests:
+          - accepted_values:
+              values: ['1','2','p']

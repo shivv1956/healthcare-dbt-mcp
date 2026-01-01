@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_imaging_studies
+    description: "HL7 Imaging Study records aligned with DICOM concepts"
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - imaging_study_id
+            - series_uid
+            - instance_uid
+
+    columns:
+      - name: imaging_study_id
+        tests:
+          - not_null
+
+      - name: imaging_datetime
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: encounter_id
+        tests:
+          - not_null
+
+      - name: series_uid
+        tests:
+          - not_null
+
+      - name: instance_uid
+        tests:
+          - not_null
+
+      - name: modality_code
+        tests:
+          - not_null
+
+      - name: procedure_code
+        tests:
+          - not_null

@@ -26,7 +26,7 @@ validated as (
         -- Primary key
         {{ validate_uuid('"Id"') }}::varchar(36) as claim_id,
 
-        -- Foreign keys
+        --Foreign key to the Patient_id , provider_id, primary_insurance_id and secondary_patient_insurance_id
         {{ validate_uuid('"Patient ID"') }}::varchar(36)  as patient_id,
         {{ validate_uuid('"Provider ID"') }}::varchar(36) as provider_id,
         {{ validate_uuid('"Primary Patient Insurance ID"') }}::varchar(36)   as Primary_patient_insurance_id,
@@ -51,9 +51,13 @@ validated as (
         "Current Illness Date"::timestamp_ntz as current_illness_date,
         "Service Date"::timestamp_ntz         as service_date,
 
-        "Status1" as status_primary,
-        "Status2" as status_secondary,
-        "StatusP" as status_patient,
+        case when upper("Status1") in ('BILLED','CLOSED') then upper("Status1") end as status_primary,
+        case when upper("Status2") in ('BILLED','CLOSED') then upper("Status2") end as status_secondary,
+        case when upper("StatusP") in ('BILLED','CLOSED') then upper("StatusP") end as status_patient,
+
+        -- "Status1" as status_primary,
+        -- "Status2" as status_secondary,
+        -- "StatusP" as status_patient,
 
         "Outstanding1"::number(18,2) as outstanding_primary,
         "Outstanding2"::number(18,2) as outstanding_secondary,
@@ -71,7 +75,7 @@ validated as (
 
         -- Deduplication
         row_number() over (
-            partition by {{ validate_uuid('"Id"') }}
+            partition by "{{ validate_uuid('"Id"') }}"
             order by LOAD_TIMESTAMP desc
         ) as rn
 

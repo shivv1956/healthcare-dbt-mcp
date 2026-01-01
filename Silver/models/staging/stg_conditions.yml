@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_conditions
+    description: "HL7 Conditions staging table (SNOMED-CT based)"
+
+    columns:
+      - name: start_date
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: encounter_id
+        tests:
+          - not_null
+
+      - name: system
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['SNOMED-CT']
+
+      - name: code
+        tests:
+          - not_null
+
+      - name: description
+        tests:
+          - not_null

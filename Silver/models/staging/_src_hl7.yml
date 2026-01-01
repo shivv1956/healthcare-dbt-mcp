@@ -6,3 +6,19 @@ sources:
       - name: ALLERGIES
       - name: CAREPLANS
       - name: CLAIMS
+      - name: CLAIMS_TRANSACTIONS
+      - name: CONDITIONS
+      - name: DEVICES
+      - name: ENCOUNTERS
+      - name: IMAGING_STUDIES
+      - name: IMMUNIZATIONS
+      - name: MEDICATIONS
+      - name: OBSERVATIONS
+      - name: ORGANIZATIONS
+      - name: PATIENTS
+      - name: PAYER_TRANSITIONS
+      - name: PAYERS
+      - name: PROCEDURES
+      - name: PROVIDERS
+      - name: SUPPLIES
+      

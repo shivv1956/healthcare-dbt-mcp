@@ -1,15 +1,15 @@
-{{ 
+{{
     config(
         materialized = 'incremental',
-        unique_key = 'careplan_id',
+        unique_key = ['patient_id', 'encounter_id', 'code'],
         incremental_strategy = 'merge'
-    ) 
+    )
 }}
 
 with source as (
 
     select *
-    from {{ source('raw', 'CAREPLANS') }}
+    from {{ source('raw', 'CONDITIONS') }}
 
     {% if is_incremental() %}
       WHERE LOAD_TIMESTAMP > (
@@ -23,28 +23,27 @@ with source as (
 validated as (
 
     select
-        -- Primary key
-        {{ validate_uuid('ID') }}::varchar(36) as careplan_id,
+        "START" as start_date,
+        "STOP"  as stop_date,
 
-        
-        "START" AS start_date,
-        "STOP"  AS stop_date,
+        --Foreign key to the Patient and Encounter
+        {{ validate_uuid('PATIENT') }}::varchar(36)   as patient_id,
+        {{ validate_uuid('ENCOUNTER') }}::varchar(36) as encounter_id,
 
-        --Foreign key to the Patient and encounter
-        {{ validate_uuid('PATIENT') }}::VARCHAR(36)   AS patient_id,
-        {{ validate_uuid('ENCOUNTER') }}::VARCHAR(36) AS encounter_id,
+        --Specifies the code system
+        'SNOMED-CT' as system,
 
-        
         CODE as code,
         DESCRIPTION as description,
 
-        REASONCODE as reason_code,
-        REASONDESCRIPTION as reason_description,
         SOURCE_FILE_NAME,
         LOAD_TIMESTAMP,
 
         row_number() over (
-            partition by {{ validate_uuid('ID') }}
+            partition by
+                {{ validate_uuid('PATIENT') }},
+                {{ validate_uuid('ENCOUNTER') }},
+                CODE
             order by LOAD_TIMESTAMP desc
         ) as rn
 
@@ -52,18 +51,17 @@ validated as (
 )
 
 select
-    careplan_id,
     start_date,
     stop_date,
     patient_id,
     encounter_id,
+    system,
     code,
     description,
-    reason_code,
-    reason_description,
     source_file_name,
     load_timestamp
 from validated
 where rn = 1
-  and careplan_id is not null
   and patient_id is not null
+  and encounter_id is not null
+  and code is not null
