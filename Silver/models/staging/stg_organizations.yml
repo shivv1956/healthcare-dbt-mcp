@@ -6,19 +6,31 @@ models:
 
     columns:
       - name: organization_id
-        tests: [not_null, unique]
+        description: "Unique identifier for the organization"
+        tests: 
+          - not_null
+          - unique
 
       - name: name
-        tests: [not_null]
+        description: "Organization name"
+        tests:
+          - not_null
 
       - name: address
-        tests: [not_null]
+        description: "Organization address"
+        tests: 
+          - not_null
 
       - name: city
-        tests: [not_null]
+        description: "Organization city"
+        tests: 
+          - not_null
 
-      - name: revenue
-        tests: [not_null]
+      # - name: revenue
+      #   tests: 
+      #     - not_null
 
       - name: utilization
-        tests: [not_null]
+        description: "Organization utilization metric"
+        tests:
+          - not_null

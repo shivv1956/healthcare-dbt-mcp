@@ -6,31 +6,39 @@ models:
 
     columns:
       - name: observation_datetime
+        description: "Timestamp of the observation"
         tests:
           - not_null
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
       - name: encounter_id
+        description: "Identifier for the encounter"
         tests:
           - not_null
 
       - name: code
+        description: "Observation code (e.g., LOINC)"
         tests:
           - not_null
 
       - name: description
+        description: "Observation description"
         tests:
           - not_null
 
       - name: value
+        description: "Measured value of the observation"
         tests:
           - not_null
 
       - name: type
+        description: "Observation value type (e.g., numeric, text)"
         tests:
           - not_null
           - accepted_values:
-              values: ['numeric','text']
+              arguments:
+                values: ['numeric','text']

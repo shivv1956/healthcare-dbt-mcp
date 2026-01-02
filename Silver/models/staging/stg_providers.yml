@@ -11,29 +11,36 @@ models:
 
     columns:
       - name: id
+        description: "Unique identifier for the provider"
         tests:
           - not_null
 
       - name: organization_id
+        description: "Identifier for the provider's organization"
         tests:
           - not_null
 
       - name: name
+        description: "Provider full name"
         tests:
           - not_null
 
       - name: gender
+        description: "Provider gender"
         tests:
           - not_null
 
       - name: speciality
+        description: "Provider specialty"
         tests:
           - not_null
 
       - name: encounters
+        description: "Count of encounters for the provider"
         tests:
           - not_null
 
       - name: procedures
+        description: "Count of procedures performed by the provider"
         tests:
           - not_null

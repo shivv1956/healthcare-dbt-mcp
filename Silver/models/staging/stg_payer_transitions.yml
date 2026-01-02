@@ -13,17 +13,21 @@ models:
 
     columns:
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests: 
           - not_null
 
       - name: payer_id
+        description: "Identifier for the payer"
         tests: 
           - not_null
 
       - name: start_year
+        description: "Year when coverage started"
         tests: 
           - not_null
 
       - name: end_year
+        description: "Year when coverage ended"
         tests: 
           - not_null

@@ -28,12 +28,14 @@ models:
       - name: severity1
         tests:
           - accepted_values:
-              values: ['MILD','MODERATE','SEVERE']
+              arguments:
+                values: ['MILD','MODERATE','SEVERE']
 
       - name: severity2
         tests:
           - accepted_values:
-              values: ['MILD','MODERATE','SEVERE']
+              arguments:
+                values: ['MILD','MODERATE','SEVERE']
 
     tests:
       - unique_patient_code

@@ -6,26 +6,32 @@ models:
 
     columns:
       - name: careplan_id
+        description: "Unique identifier for the care plan"
         tests:
           - not_null
           - unique
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
       - name: encounter_id
+        description: "Identifier for the related encounter"
         tests:
           - not_null
 
       - name: start_date
+        description: "Care plan start date"
         tests:
           - not_null
 
       - name: code
+        description: "Care plan code"
         tests:
           - not_null
 
       - name: description
+        description: "Care plan description"
         tests:
           - not_null

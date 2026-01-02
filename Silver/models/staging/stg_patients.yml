@@ -6,62 +6,77 @@ models:
 
     columns:
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests: 
           - not_null
           - unique
 
       - name: birth_date
+        description: "Patient birth date"
         tests: 
           - not_null
 
       - name: ssn
+        description: "Social Security Number (masked where appropriate)"
         tests: 
           - not_null
 
       - name: first_name
+        description: "Patient given name"
         tests: 
           - not_null
 
       - name: last_name
+        description: "Patient family name"
         tests: 
           - not_null
 
       - name: race
+        description: "Patient race"
         tests: 
           - not_null
 
       - name: ethnicity
+        description: "Patient ethnicity"
         tests: 
           - not_null
 
       - name: gender
+        description: "Patient gender"
         tests: 
           - not_null
 
       - name: birth_place
+        description: "Place of birth"
         tests: 
           - not_null
           
       - name: address
+        description: "Patient address"
         tests: 
           - not_null
 
       - name: city
+        description: "Patient city"
         tests: 
           - not_null
         
       - name: state
+        description: "Patient state"
         tests: 
           - not_null
 
       - name: healthcare_expenses
+        description: "Total healthcare expenses"
         tests: 
           - not_null
 
       - name: healthcare_coverage
+        description: "Type of healthcare coverage"
         tests: 
           - not_null
 
       - name: income
+        description: "Patient income"
         tests: 
           - not_null
