@@ -6,32 +6,39 @@ models:
 
     columns:
       - name: start_date
+        description: "The date when the allergy was first recorded"   
         tests:
           - not_null
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
           
       - name: CODE
+        description: "Allergy code from standardized coding system"
         tests:
           - not_null
 
       - name: system
+        description: "Coding system used for the allergy code"
         tests:
           - not_null
 
       - name: description
+        description: "Description of the allergy"
         tests:
           - not_null
 
       - name: severity1
+        description: "Severity level of the allergy"
         tests:
           - accepted_values:
               arguments:
                 values: ['MILD','MODERATE','SEVERE']
 
       - name: severity2
+        description: "Secondary severity level of the allergy"
         tests:
           - accepted_values:
               arguments:
