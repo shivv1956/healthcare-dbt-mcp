@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_observations
+    description: "HL7 Observation records aligned with FHIR/LOINC concepts"
+
+    columns:
+      - name: observation_datetime
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: encounter_id
+        tests:
+          - not_null
+
+      - name: code
+        tests:
+          - not_null
+
+      - name: description
+        tests:
+          - not_null
+
+      - name: value
+        tests:
+          - not_null
+
+      - name: type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['numeric','text']

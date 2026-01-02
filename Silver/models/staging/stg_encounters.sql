@@ -58,24 +58,7 @@ validated as (
     from source
 )
 
-select
-    encounter_id,
-    start_ts,
-    stop_ts,
-    patient_id,
-    organization_id,
-    provider_id,
-    payer_id,
-    encounter_class,
-    code,
-    description,
-    base_encounter_cost,
-    total_claim_cost,
-    payer_coverage,
-    reason_code,
-    reason_description,
-    source_file_name,
-    load_timestamp
+select *
 from validated
 where rn = 1
   and encounter_id is not null

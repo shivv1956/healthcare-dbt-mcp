@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_providers
+    description: "HL7 Provider records aligned with organization and procedure counts"
+
+    # tests:
+    #   - dbt_utils.unique_combination_of_columns:
+    #       combination_of_columns:
+    #         - id
+
+    columns:
+      - name: id
+        tests:
+          - not_null
+
+      - name: organization_id
+        tests:
+          - not_null
+
+      - name: name
+        tests:
+          - not_null
+
+      - name: gender
+        tests:
+          - not_null
+
+      - name: speciality
+        tests:
+          - not_null
+
+      - name: encounters
+        tests:
+          - not_null
+
+      - name: procedures
+        tests:
+          - not_null

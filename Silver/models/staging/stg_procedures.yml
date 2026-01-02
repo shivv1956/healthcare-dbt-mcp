@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_procedures
+    description: "HL7 Procedure records aligned with SNOMED-CT codes"
+
+    # tests:
+    #   - dbt_utils.unique_combination_of_columns:
+    #       combination_of_columns:
+    #         - patient_id
+    #         - encounter_id
+    #         - code
+    #         - start_datetime
+
+    columns:
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: encounter_id
+        tests:
+          - not_null
+
+      - name: start_datetime
+        tests:
+          - not_null
+
+      - name: code
+        tests:
+          - not_null
+
+      - name: system
+        tests:
+          - not_null
+
+      # - name: base_cost
+      #   tests:
+      #     - not_null
+
+      - name: description
+        tests:
+          - not_null

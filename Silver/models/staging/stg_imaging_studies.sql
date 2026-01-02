@@ -61,22 +61,7 @@ validated as (
     from source
 )
 
-select
-    imaging_study_id,
-    imaging_datetime,
-    patient_id,
-    encounter_id,
-    series_uid,
-    instance_uid,
-    body_site_code,
-    body_site_description,
-    modality_code,
-    modality_description,
-    sop_code,
-    sop_description,
-    procedure_code,
-    source_file_name,
-    load_timestamp
+select *
 from validated
 where rn = 1
   and imaging_study_id is not null

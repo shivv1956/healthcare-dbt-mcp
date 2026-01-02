@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_organizations
+    description: "HL7 Organization master data"
+
+    columns:
+      - name: organization_id
+        tests: [not_null, unique]
+
+      - name: name
+        tests: [not_null]
+
+      - name: address
+        tests: [not_null]
+
+      - name: city
+        tests: [not_null]
+
+      - name: revenue
+        tests: [not_null]
+
+      - name: utilization
+        tests: [not_null]

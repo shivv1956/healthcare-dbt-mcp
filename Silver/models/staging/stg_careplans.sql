@@ -51,18 +51,7 @@ validated as (
     from source
 )
 
-select
-    careplan_id,
-    start_date,
-    stop_date,
-    patient_id,
-    encounter_id,
-    code,
-    description,
-    reason_code,
-    reason_description,
-    source_file_name,
-    load_timestamp
+select *
 from validated
 where rn = 1
   and careplan_id is not null

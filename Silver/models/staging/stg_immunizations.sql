@@ -49,15 +49,7 @@ validated as (
     from source
 )
 
-select
-    immunization_datetime,
-    patient_id,
-    encounter_id,
-    code,
-    description,
-    cost,
-    source_file_name,
-    load_timestamp
+select *
 from validated
 where rn = 1
   and immunization_datetime is not null

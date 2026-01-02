@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_supplies
+    description: "HL7 Supplies records aligned with SNOMED-CT"
+
+    # tests:
+    #   - dbt_utils.unique_combination_of_columns:
+    #       combination_of_columns:
+    #         - patient_id
+    #         - encounter_id
+    #         - code
+    #         - date
+
+    columns:
+      - name: date
+        tests:
+          - not_null
+
+      - name: patient_id
+        tests:
+          - not_null
+
+      # - name: encounter_id
+      #   tests:
+      #     - not_null
+
+      - name: code
+        tests:
+          - not_null
+
+      - name: description
+        tests:
+          - not_null
+
+      - name: quantity
+        tests:
+          - not_null

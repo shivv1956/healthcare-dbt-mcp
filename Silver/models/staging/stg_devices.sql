@@ -49,16 +49,7 @@ validated as (
     from source
 )
 
-select
-    start_ts,
-    stop_ts,
-    patient_id,
-    encounter_id,
-    code,
-    description,
-    udi,
-    source_file_name,
-    load_timestamp
+select *
 from validated
 where rn = 1
   and patient_id is not null

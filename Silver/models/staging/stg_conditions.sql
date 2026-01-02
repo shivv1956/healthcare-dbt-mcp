@@ -50,16 +50,7 @@ validated as (
     from source
 )
 
-select
-    start_date,
-    stop_date,
-    patient_id,
-    encounter_id,
-    system,
-    code,
-    description,
-    source_file_name,
-    load_timestamp
+select *
 from validated
 where rn = 1
   and patient_id is not null

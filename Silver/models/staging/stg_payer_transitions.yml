@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_payer_transitions
+    description: "HL7 Insurance Coverage / Patient-Payer relationship"
+
+    # tests:
+    #   - dbt_utils.unique_combination_of_columns:
+    #       combination_of_columns:
+    #         - patient_id
+    #         - payer_id
+    #         - start_year
+
+    columns:
+      - name: patient_id
+        tests: 
+          - not_null
+
+      - name: payer_id
+        tests: 
+          - not_null
+
+      - name: start_year
+        tests: 
+          - not_null
+
+      - name: end_year
+        tests: 
+          - not_null
