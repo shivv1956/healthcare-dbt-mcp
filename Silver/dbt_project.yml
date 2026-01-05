@@ -35,3 +35,12 @@ models:
     example:
       +materialized: view
     
+    # Staging models stay in default SILVER schema
+    staging:
+      +materialized: incremental
+    
+    # Marts (dimensions and facts) go to GOLD schema
+    marts:
+      +schema: gold
+      +materialized: incremental
+    

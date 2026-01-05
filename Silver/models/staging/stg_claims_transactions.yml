@@ -20,8 +20,10 @@ models:
       - name: type
         tests:
           - accepted_values:
-              values: ['CHARGE','PAYMENT','ADJUSTMENT','TRANSFERIN','TRANSFEROUT']
+              arguments:
+                values: ['CHARGE','PAYMENT','ADJUSTMENT','TRANSFERIN','TRANSFEROUT']
       - name: transfer_type
         tests:
           - accepted_values:
-              values: ['1','2','p']
+              arguments:
+                values: ['1','2','p']

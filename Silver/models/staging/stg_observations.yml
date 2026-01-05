@@ -33,4 +33,5 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['numeric','text']
+              arguments:
+                values: ['numeric','text']

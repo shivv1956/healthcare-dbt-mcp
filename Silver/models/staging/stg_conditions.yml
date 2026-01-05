@@ -21,7 +21,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['SNOMED-CT']
+              arguments:
+                values: ['SNOMED-CT']
 
       - name: code
         tests:

@@ -6,10 +6,11 @@ models:
 
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - imaging_study_id
-            - series_uid
-            - instance_uid
+          arguments:
+            combination_of_columns:
+              - imaging_study_id
+              - series_uid
+              - instance_uid
 
     columns:
       - name: imaging_study_id

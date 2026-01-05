@@ -1,0 +1,95 @@
+version: 2
+
+models:
+  - name: dim_patient
+    description: "Patient dimension table containing demographic and address information"
+    columns:
+      - name: patient_id
+        description: "Surrogate warehouse key"
+        tests:
+          - unique
+          - not_null
+      
+      - name: patient_uuid
+        description: "UUID from source system (business key)"
+        tests:
+          - unique
+          - not_null
+      
+      - name: birth_date
+        description: "Date of birth"
+      
+      - name: death_date
+        description: "Date of death (null if alive)"
+      
+      - name: first
+        description: "First name"
+      
+      - name: last
+        description: "Last name"
+      
+      - name: gender
+        description: "Gender (M/F)"
+      
+      - name: race
+        description: "Race description"
+      
+      - name: ethnicity
+        description: "Ethnicity description"
+      
+      - name: marital
+        description: "Marital status"
+      
+      - name: city
+        description: "Address city"
+      
+      - name: state
+        description: "Address state"
+      
+      - name: zip
+        description: "Postal code"
+      
+      - name: income
+        description: "Annual income"
+      
+      - name: healthcare_expenses
+        description: "Lifetime patient-paid cost (descriptive, not for aggregation)"
+      
+      - name: healthcare_coverage
+        description: "Lifetime payer-paid cost (descriptive, not for aggregation)"
+
+  - name: dim_provider
+    description: "Provider dimension table containing provider and organization information"
+    columns:
+      - name: provider_id
+        description: "Surrogate warehouse key"
+        tests:
+          - unique
+          - not_null
+      
+      - name: provider_uuid
+        description: "UUID from source system (business key)"
+        tests:
+          - unique
+          - not_null
+      
+      - name: name
+        description: "Full name of the provider"
+      
+      - name: gender
+        description: "Provider gender"
+      
+      - name: specialty
+        description: "Provider specialty"
+      
+      - name: organization_uuid
+        description: "Foreign key to Organizations.Id"
+      
+      - name: city
+        description: "Provider city"
+      
+      - name: state
+        description: "Provider state"
+      
+      - name: zip
+        description: "Provider postal code"

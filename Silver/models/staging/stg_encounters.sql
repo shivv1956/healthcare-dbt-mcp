@@ -36,7 +36,13 @@ validated as (
         "Provider"::varchar(36)     as provider_id,
         {{ validate_uuid('"Payer"') }}::varchar(36)        as payer_id,
 
-        "EncounterClass" as encounter_class,
+        CASE 
+            WHEN "EncounterClass" = 'AMB' THEN 'AMBIGUOUS'
+            WHEN "EncounterClass" = 'EMER' THEN 'EMERGENCY'
+            WHEN "EncounterClass" = 'INP' THEN 'INPATIENT'
+            WHEN "EncounterClass" = 'OUTP' THEN 'OUTPATIENT'
+            WHEN "EncounterClass" = 'VIRT' THEN 'VIRTUAL'  
+        END as encounter_class,
         "Code"           as code,
         "Description"    as description,
 
