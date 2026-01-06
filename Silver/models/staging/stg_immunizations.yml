@@ -22,11 +22,19 @@ models:
         description: "Unique identifier for the patient"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_patients')
+                field: patient_id
 
       - name: encounter_id
         description: "Identifier for the related encounter"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_encounters')
+                field: encounter_id
 
       - name: code
         description: "Immunization code (CVX)"

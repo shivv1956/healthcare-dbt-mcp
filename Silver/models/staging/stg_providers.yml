@@ -19,6 +19,10 @@ models:
         description: "Identifier for the provider's organization"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_organizations')
+                field: organization_id
 
       - name: name
         description: "Provider full name"

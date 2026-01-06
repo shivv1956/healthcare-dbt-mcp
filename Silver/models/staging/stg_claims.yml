@@ -15,11 +15,19 @@ models:
         description: "Unique identifier for the patient"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_patients')
+                field: patient_id
 
       - name: provider_id
         description: "Unique identifier for the provider"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_providers')
+                field: id
 
       - name: service_date
         description: "Date of service"

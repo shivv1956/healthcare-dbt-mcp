@@ -14,16 +14,28 @@ models:
         description: "Claim identifier this transaction belongs to"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_claims')
+                field: claim_id
 
       - name: patient_id
         description: "Unique identifier for the patient"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_patients')
+                field: patient_id
 
       - name: provider_id
         description: "Unique identifier for the provider"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_providers')
+                field: id
 
       - name: type
         description: "Transaction type (CHARGE, PAYMENT, ADJUSTMENT, TRANSFERIN, TRANSFEROUT)"

@@ -35,8 +35,8 @@ final as (
         {{ dbt_utils.generate_surrogate_key(['m.code']) }} as medication_key,
         
         -- Medication information
-        m.code,
-        m.description,
+        coalesce(m.code, '0') as code,
+        coalesce(m.description, 'not mentioned') as description,
         
         -- Metrics
         coalesce(me.patient_count, 0) as patient_count,
