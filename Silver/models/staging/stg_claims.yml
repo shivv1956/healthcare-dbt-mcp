@@ -6,39 +6,47 @@ models:
 
     columns:
       - name: claim_id
+        description: "Unique identifier for the claim"
         tests:
           - not_null
           - unique
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
       - name: provider_id
+        description: "Unique identifier for the provider"
         tests:
           - not_null
 
       - name: service_date
+        description: "Date of service"
         tests:
           - not_null
 
       - name: appointment_id
+        description: "Identifier for the appointment related to the claim"
         tests:
           - not_null
 
       - name: status_primary
+        description: "Primary status of the claim"
         tests:
           - accepted_values:
               arguments:
                 values: ['BILLED', 'CLOSED']
 
       - name: status_secondary
+        description: "Secondary status of the claim"
         tests:
           - accepted_values:
               arguments:
                 values: ['BILLED', 'CLOSED']
 
       - name: status_patient
+        description: "Patient-facing status of the claim"
         tests:
           - accepted_values:
               arguments:

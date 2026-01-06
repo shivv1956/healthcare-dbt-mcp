@@ -2,7 +2,7 @@
   config(
     materialized = 'incremental',
     incremental_strategy = 'merge',
-    unique_key = ['patient_id','encounter_id','code','start_datetime']
+    unique_key = ['patient_id','encounter_id','start_datetime']
   ) 
 }}
 
@@ -45,7 +45,7 @@ validated as (
         row_number() over (
             partition by {{ validate_uuid('"PATIENT"') }},
                          {{ validate_uuid('"ENCOUNTER"') }},
-                         "CODE","Start"
+                         "Start"
             order by load_timestamp desc
         ) as rn
 

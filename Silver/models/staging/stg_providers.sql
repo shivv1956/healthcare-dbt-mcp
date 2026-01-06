@@ -23,7 +23,7 @@ with source as (
 validated as (
 
     select
-        {{ validate_uuid('"Id"') }} as id,
+        "Id" as id,
         {{ validate_uuid('"Organization"') }} as organization_id,
 
         "Name" as name,
@@ -42,7 +42,7 @@ validated as (
         LOAD_TIMESTAMP,
 
         row_number() over (
-            partition by {{ validate_uuid('"Id"') }}
+            partition by "Id"
             order by LOAD_TIMESTAMP desc
         ) as rn
 
@@ -52,4 +52,4 @@ validated as (
 select *
 from validated
 where rn = 1
-  and id is not null;
+  and id is not null

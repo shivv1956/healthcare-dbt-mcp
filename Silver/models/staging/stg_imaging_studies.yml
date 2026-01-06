@@ -14,33 +14,41 @@ models:
 
     columns:
       - name: imaging_study_id
+        description: "Unique identifier for the imaging study"
         tests:
           - not_null
 
       - name: imaging_datetime
+        description: "Timestamp of the imaging study"
         tests:
           - not_null
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
       - name: encounter_id
+        description: "Identifier for the related encounter"
         tests:
           - not_null
 
       - name: series_uid
+        description: "Unique identifier for the series within the imaging study"
         tests:
           - not_null
 
       - name: instance_uid
+        description: "Unique identifier for the instance within the series"
         tests:
           - not_null
 
       - name: modality_code
+        description: "Modality code of the imaging study (e.g., CT, MRI)"
         tests:
           - not_null
 
       - name: procedure_code
+        description: "Procedure code associated with the imaging study"
         tests:
           - not_null

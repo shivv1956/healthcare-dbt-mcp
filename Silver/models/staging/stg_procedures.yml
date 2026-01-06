@@ -14,22 +14,27 @@ models:
 
     columns:
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
       - name: encounter_id
+        description: "Identifier for the related encounter"
         tests:
           - not_null
 
       - name: start_datetime
+        description: "Procedure start timestamp"
         tests:
           - not_null
 
       - name: code
+        description: "Procedure code"
         tests:
           - not_null
 
       - name: system
+        description: "Coding system used for the procedure code"
         tests:
           - not_null
 
@@ -38,5 +43,6 @@ models:
       #     - not_null
 
       - name: description
+        description: "Procedure description"
         tests:
           - not_null

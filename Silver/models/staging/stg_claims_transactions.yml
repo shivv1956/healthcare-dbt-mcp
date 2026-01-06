@@ -5,24 +5,35 @@ models:
     description: "Staging table for claim transactions with validated UUIDs and deduplication."
     columns:
       - name: id
+        description: "Unique identifier for the transaction"
         tests:
           - not_null
           - unique
+
       - name: claim_id
+        description: "Claim identifier this transaction belongs to"
         tests:
           - not_null
+
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
+
       - name: provider_id
+        description: "Unique identifier for the provider"
         tests:
           - not_null
+
       - name: type
+        description: "Transaction type (CHARGE, PAYMENT, ADJUSTMENT, TRANSFERIN, TRANSFEROUT)"
         tests:
           - accepted_values:
               arguments:
                 values: ['CHARGE','PAYMENT','ADJUSTMENT','TRANSFERIN','TRANSFEROUT']
+
       - name: transfer_type
+        description: "Transfer type ('1','2','p')"
         tests:
           - accepted_values:
               arguments:

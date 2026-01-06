@@ -6,14 +6,17 @@ models:
 
     columns:
       - name: start_ts
+        description: "Device association start timestamp"
         tests:
           - not_null
 
       - name: stop_ts
+        description: "Device association stop timestamp"
         tests:
           - not_null
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
@@ -22,13 +25,16 @@ models:
       #     - not_null
 
       - name: code
+        description: "Device code"
         tests:
           - not_null
 
       - name: description
+        description: "Device description"
         tests:
           - not_null
 
       - name: udi
+        description: "Unique Device Identifier"
         tests:
           - not_null

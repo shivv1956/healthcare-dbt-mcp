@@ -14,18 +14,22 @@ models:
 
     columns:
       - name: immunization_datetime
+        description: "Timestamp of the immunization event"
         tests:
           - not_null
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
       - name: encounter_id
+        description: "Identifier for the related encounter"
         tests:
           - not_null
 
       - name: code
+        description: "Immunization code (CVX)"
         tests:
           - not_null
 

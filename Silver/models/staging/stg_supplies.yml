@@ -14,10 +14,12 @@ models:
 
     columns:
       - name: date
+        description: "Supply date"
         tests:
           - not_null
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
@@ -26,13 +28,16 @@ models:
       #     - not_null
 
       - name: code
+        description: "Supply code"
         tests:
           - not_null
 
       - name: description
+        description: "Supply description"
         tests:
           - not_null
 
       - name: quantity
+        description: "Quantity of supply used"
         tests:
           - not_null

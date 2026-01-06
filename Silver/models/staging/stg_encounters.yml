@@ -6,27 +6,33 @@ models:
 
     columns:
       - name: encounter_id
+        description: "Unique identifier for the encounter"
         tests:
           - not_null
           - unique
 
       - name: start_ts
+        
         tests:
           - not_null
 
       - name: stop_ts
+        description: "Encounter stop timestamp"
         tests:
           - not_null
 
       - name: patient_id
+        description: "Unique identifier for the patient"
         tests:
           - not_null
 
       - name: organization_id
+        description: "Identifier for the associated organization"
         tests:
           - not_null
 
       - name: provider_id
+        
         tests:
           - not_null
 
@@ -35,10 +41,12 @@ models:
       #     - not_null
 
       - name: encounter_class
+        description: "Class of the encounter"
         tests:
           - not_null
 
       - name: code
+        description: "Encounter code"
         tests:
           - not_null
 
