@@ -12,3 +12,12 @@ pydantic>=2.0.0
 # AWS Provider for S3 upload functionality
 # Enables integration with AWS services including S3
 apache-airflow-providers-amazon>=8.0.0
+
+# Snowflake Provider for data warehouse integration
+# Enables Snowflake connections and operators
+apache-airflow-providers-snowflake>=5.0.0
+
+# DBT (Data Build Tool) for data transformations
+# Core package and Snowflake adapter for ELT workflows
+dbt-core>=1.7.0
+dbt-snowflake>=1.7.0

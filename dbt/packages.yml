@@ -1,0 +1,11 @@
+# DBT Packages for Synthea FHIR Project
+# These packages provide utility macros and functions
+
+packages:
+  # DBT utilities for common macros
+  - package: dbt-labs/dbt_utils
+    version: 1.1.1
+  
+  # Codegen for generating boilerplate SQL
+  - package: dbt-labs/codegen
+    version: 0.12.1

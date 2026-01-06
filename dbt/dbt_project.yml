@@ -1,0 +1,94 @@
+# DBT Project Configuration for Synthea FHIR Data Transformation
+# This project transforms raw FHIR JSON bundles from Snowflake into normalized analytics tables
+
+name: 'synthea_fhir'
+version: '1.0.0'
+config-version: 2
+
+# Project profile (connects to profiles.yml)
+profile: 'synthea_fhir'
+
+# Directories
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Output directory for compiled SQL
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Model configurations
+models:
+  synthea_fhir:
+    # Staging models: Incremental materialization with merge strategy
+    staging:
+      +materialized: incremental
+      +unique_key: id
+      +incremental_strategy: merge
+      +on_schema_change: sync_all_columns
+      +schema: staging
+      +tags: ["staging", "incremental"]
+      
+    # Intermediate models: Full refresh with table materialization
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+      +tags: ["intermediate", "full_refresh"]
+      
+    # Marts models: Table materialization for analytics
+    marts:
+      +materialized: table
+      +schema: marts
+      +tags: ["marts", "analytics"]
+
+# Seeds configuration
+seeds:
+  synthea_fhir:
+    +schema: seeds
+
+# Snapshots configuration
+snapshots:
+  synthea_fhir:
+    +target_schema: snapshots
+    +unique_key: id
+    +strategy: timestamp
+    +updated_at: updated_at
+
+# Tests
+tests:
+  synthea_fhir:
+    +store_failures: true
+    +schema: test_results
+
+# Quoting configuration for Snowflake
+quoting:
+  database: false
+  schema: false
+  identifier: false
+
+# Global variables
+vars:
+  # Source database configuration
+  raw_database: "{{ env_var('SNOWFLAKE_DATABASE', 'SYNTHEA') }}"
+  raw_schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'RAW') }}"
+  
+  # Date range for incremental models (can be overridden in CLI)
+  start_date: "2020-01-01"
+  end_date: "2030-12-31"
+  
+  # Batch processing settings
+  incremental_lookback_days: 7
+  max_records_per_run: 100000
+
+# Documentation
+docs-paths: ["docs"]
+
+# Dispatch configuration for custom macros
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['synthea_fhir', 'dbt']

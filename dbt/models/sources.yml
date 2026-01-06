@@ -1,0 +1,51 @@
+# Sources Configuration for DBT Models
+# Defines raw data sources from Snowflake RAW schema
+
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw FHIR bundles loaded from S3 into Snowflake"
+    database: "{{ var('raw_database') }}"
+    schema: "{{ var('raw_schema') }}"
+    
+    tables:
+      - name: fhir_bundles
+        description: "Raw FHIR R4 transaction bundles in JSON format"
+        columns:
+          - name: file_key
+            description: "S3 file key (unique identifier)"
+            tests:
+              - unique
+              - not_null
+          
+          - name: patient_id
+            description: "Patient UUID extracted from bundle"
+          
+          - name: loaded_at
+            description: "Timestamp when bundle was loaded to Snowflake"
+            tests:
+              - not_null
+          
+          - name: bundle
+            description: "FHIR bundle as VARIANT (JSON) type"
+            tests:
+              - not_null
+      
+      - name: load_watermark
+        description: "Tracking table for incremental loads from S3"
+        columns:
+          - name: load_id
+            description: "Auto-incrementing load batch ID"
+          
+          - name: last_loaded_key
+            description: "Last S3 key successfully loaded"
+          
+          - name: last_loaded_at
+            description: "Timestamp of last successful load"
+          
+          - name: files_loaded
+            description: "Number of files loaded in this batch"
+          
+          - name: status
+            description: "Load status: SUCCESS or FAILED"
