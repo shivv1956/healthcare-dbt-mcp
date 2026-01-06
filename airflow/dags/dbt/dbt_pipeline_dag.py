@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
+
 DBT_PROJECT_DIR = "/opt/dbt/healthcare-dbt-mcp/Silver"  
 
 default_args = {
