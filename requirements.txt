@@ -19,5 +19,5 @@ apache-airflow-providers-snowflake>=5.0.0
 
 # DBT (Data Build Tool) for data transformations
 # Core package and Snowflake adapter for ELT workflows
-dbt-core>=1.7.0
-dbt-snowflake>=1.7.0
+dbt-core>=1.7.0,<1.8.0
+dbt-snowflake>=1.7.0,<1.8.0

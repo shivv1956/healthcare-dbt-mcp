@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: int_reference_map
+    description: "UUID to resource lookup table - resolves FHIR references across resource types"
+    config:
+      tags: ['intermediate', 'reference', 'lookup']
+      
+  - name: int_claims_enriched
+    description: "Financial data aggregations by patient with total costs and coverage"
+    config:
+      tags: ['intermediate', 'financial', 'claims']
+      
+  - name: int_medication_reasons
+    description: "Links medications to conditions/diagnoses using reasonReference"
+    config:
+      tags: ['intermediate', 'relationships', 'medications']
+      
+  - name: int_procedure_reasons
+    description: "Links procedures to conditions/diagnoses using reasonReference"
+    config:
+      tags: ['intermediate', 'relationships', 'procedures']

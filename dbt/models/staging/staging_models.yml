@@ -1,0 +1,92 @@
+version: 2
+
+models:
+  - name: stg_patients
+    description: "Staging table for patient demographics with race/ethnicity extensions"
+    config:
+      tags: ['staging', 'fhir', 'patients']
+      
+  - name: stg_encounters
+    description: "Staging table for encounter/visit data"
+    config:
+      tags: ['staging', 'fhir', 'encounters']
+      
+  - name: stg_conditions
+    description: "Staging table for diagnoses (SNOMED-CT coded)"
+    config:
+      tags: ['staging', 'fhir', 'conditions']
+      
+  - name: stg_observations
+    description: "Staging table for lab results and vital signs (LOINC coded)"
+    config:
+      tags: ['staging', 'fhir', 'observations']
+      
+  - name: stg_medications
+    description: "Staging table for prescription data"
+    config:
+      tags: ['staging', 'fhir', 'medications']
+      
+  - name: stg_procedures
+    description: "Staging table for medical procedures"
+    config:
+      tags: ['staging', 'fhir', 'procedures']
+      
+  - name: stg_immunizations
+    description: "Staging table for vaccination records"
+    config:
+      tags: ['staging', 'fhir', 'immunizations']
+      
+  - name: stg_allergies
+    description: "Staging table for allergy/intolerance data"
+    config:
+      tags: ['staging', 'fhir', 'allergies']
+      
+  - name: stg_careplans
+    description: "Staging table for care management plans"
+    config:
+      tags: ['staging', 'fhir', 'careplans']
+      
+  - name: stg_devices
+    description: "Staging table for medical devices"
+    config:
+      tags: ['staging', 'fhir', 'devices']
+      
+  - name: stg_supplies
+    description: "Staging table for medical supplies"
+    config:
+      tags: ['staging', 'fhir', 'supplies']
+      
+  - name: stg_imaging_studies
+    description: "Staging table for radiology/imaging data"
+    config:
+      tags: ['staging', 'fhir', 'imaging']
+      
+  - name: stg_claims
+    description: "Staging table for insurance claims (simplified)"
+    config:
+      tags: ['staging', 'fhir', 'claims']
+      
+  - name: stg_claims_transactions
+    description: "Staging table for claim line items"
+    config:
+      tags: ['staging', 'fhir', 'claims']
+      
+  - name: stg_payers
+    description: "Staging table for insurance companies"
+    config:
+      tags: ['staging', 'fhir', 'payers']
+      
+  - name: stg_payer_transitions
+    description: "Staging table for coverage history"
+    config:
+      tags: ['staging', 'fhir', 'payers']
+      
+  - name: stg_providers
+    description: "Staging table for healthcare providers"
+    config:
+      tags: ['staging', 'fhir', 'providers']
+      
+  - name: stg_organizations
+    description: "Staging table for healthcare facilities"
+    config:
+      tags: ['staging', 'fhir', 'organizations']

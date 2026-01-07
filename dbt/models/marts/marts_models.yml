@@ -1,0 +1,81 @@
+version: 2
+
+models:
+  - name: dim_patients
+    description: "Patient dimension table with demographics, calculated age, and lifetime expenses"
+    config:
+      tags: ['marts', 'dimension', 'patients']
+    columns:
+      - name: patient_id
+        description: "Unique patient identifier"
+        tests:
+          - unique
+          - not_null
+      - name: current_age
+        description: "Calculated current age in years"
+      - name: lifetime_healthcare_expenses
+        description: "Total healthcare costs incurred by patient"
+        
+  - name: fct_encounters
+    description: "Encounter fact table with costs, duration, and visit details"
+    config:
+      tags: ['marts', 'fact', 'encounters']
+    columns:
+      - name: encounter_id
+        description: "Unique encounter identifier"
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        description: "Foreign key to dim_patients"
+        tests:
+          - not_null
+      - name: total_claim_cost
+        description: "Total cost of encounter"
+        
+  - name: fct_medications
+    description: "Medication fact table with costs, dispense details, and linked conditions"
+    config:
+      tags: ['marts', 'fact', 'medications']
+    columns:
+      - name: medication_id
+        description: "Unique medication identifier"
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        description: "Foreign key to dim_patients"
+        tests:
+          - not_null
+          
+  - name: fct_procedures
+    description: "Procedure fact table with costs and linked conditions"
+    config:
+      tags: ['marts', 'fact', 'procedures']
+    columns:
+      - name: procedure_id
+        description: "Unique procedure identifier"
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        description: "Foreign key to dim_patients"
+        tests:
+          - not_null
+          
+  - name: fct_observations
+    description: "Observation fact table for lab results and vital signs"
+    config:
+      tags: ['marts', 'fact', 'observations']
+    columns:
+      - name: observation_id
+        description: "Unique observation identifier"
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        description: "Foreign key to dim_patients"
+        tests:
+          - not_null
+      - name: value_quantity
+        description: "Numeric measurement value"
