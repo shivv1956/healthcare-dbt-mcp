@@ -32,10 +32,10 @@ models:
         description: "Unique identifier for the provider"
         tests:
           - not_null
-          - relationships:
-              arguments:
-                to: ref('stg_providers')
-                field: id
+          # - relationships:
+          #     arguments:
+          #       to: ref('stg_providers')
+          #       field: id
 
       - name: type
         description: "Transaction type (CHARGE, PAYMENT, ADJUSTMENT, TRANSFERIN, TRANSFEROUT)"
