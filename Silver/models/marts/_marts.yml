@@ -10,11 +10,6 @@ models:
           - unique
           - not_null
       
-      - name: patient_uuid
-        description: "UUID from source system (business key)"
-        tests:
-          - unique
-          - not_null
       
       - name: birth_date
         description: "Date of birth"
@@ -67,11 +62,7 @@ models:
           - unique
           - not_null
       
-      - name: provider_uuid
-        description: "UUID from source system (business key)"
-        tests:
-          - unique
-          - not_null
+
       
       - name: name
         description: "Full name of the provider"
