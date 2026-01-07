@@ -1,0 +1,23 @@
+name: Trigger Airflow DAG on Push
+
+on:
+  push:
+    branches:
+      - chethan
+      # - lohith
+
+jobs:
+  trigger-airflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Airflow DAG
+        run: |
+          curl -X POST " https://heterochromatic-unchildishly-marlo.ngrok-free.dev/api/v1/dags/dbt_silver_gold_pipeline/dagRuns" \
+          -u github_ci:strongpassword123 \
+          -H "Content-Type: application/json" \
+          -d '{
+                "conf": {
+                  "triggered_by": "github_push"
+                }
+              }'
