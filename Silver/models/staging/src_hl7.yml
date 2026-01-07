@@ -17,7 +17,7 @@ sources:
       - name: ORGANIZATIONS
       - name: PATIENTS
       - name: PAYER_TRANSITIONS
-      # - name: PAYERS
+      - name: PAYERS
       - name: PROCEDURES
       - name: PROVIDERS
       - name: SUPPLIES

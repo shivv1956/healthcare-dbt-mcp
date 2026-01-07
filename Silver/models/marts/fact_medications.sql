@@ -16,19 +16,11 @@ final as (
         -- Foreign keys to dimensions
         patient_id,
         encounter_id,
-        medication_code as medication_key,
-        
-        -- Degenerate dimensions (transaction details)
-        start_datetime,
-        stop_datetime,
+        payer_id,
+        medication_code,
         
         -- Facts/Measures
-        coalesce(totalcost, 0) as total_cost,
-        coalesce(base_cost, 0) as base_cost,
-        coalesce(payer_coverage, 0) as payer_coverage,
-        coalesce(dispenses, 0) as dispenses,
-        coalesce(reasoncode, 'UNKNOWN') as reason_code,
-        reasondescription as reason_description
+        coalesce(totalcost, 0) as total_cost
         
     from medications
     where patient_id is not null
