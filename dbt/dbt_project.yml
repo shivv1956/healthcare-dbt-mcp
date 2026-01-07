@@ -74,8 +74,8 @@ quoting:
 # Global variables
 vars:
   # Source database configuration
-  raw_database: "{{ env_var('SNOWFLAKE_DATABASE', 'SYNTHEA') }}"
-  raw_schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'RAW') }}"
+  raw_database: "SYNTHEA"
+  raw_schema: "RAW"
   
   # Date range for incremental models (can be overridden in CLI)
   start_date: "2020-01-01"

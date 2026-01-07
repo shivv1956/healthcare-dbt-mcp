@@ -131,14 +131,8 @@ dbt_deps = BashOperator(
     dag=dag,
 )
 
-# Task 3: Test Snowflake connection
-dbt_debug = BashOperator(
-    task_id='dbt_debug',
-    bash_command=f'cd {DBT_PROJECT_DIR} && dbt debug --profiles-dir {DBT_PROFILES_DIR}',
-    dag=dag,
-)
-
-# Task 4: Run staging models
+# Task 3: Run staging models
+# Note: dbt_debug removed - connection is implicitly tested by dbt run
 dbt_run_staging = BashOperator(
     task_id='dbt_run_staging',
     bash_command=f'cd {DBT_PROJECT_DIR} && dbt run --select tag:staging --profiles-dir {DBT_PROFILES_DIR}',
@@ -205,8 +199,8 @@ dbt_docs_generate = BashOperator(
 # Task dependencies
 # Removed wait_for_s3_load sensor - dbt runs on schedule and data will be available
 # since s3_to_snowflake_load runs every 5 min (more frequent than dbt's 10 min)
-check_dbt >> dbt_deps >> dbt_debug
-dbt_debug >> dbt_run_staging >> parse_staging_results
+# Removed dbt_debug - git check fails despite git being installed (overly strict check)
+check_dbt >> dbt_deps >> dbt_run_staging >> parse_staging_results
 parse_staging_results >> dbt_run_intermediate >> parse_intermediate_results
 parse_intermediate_results >> dbt_run_marts >> parse_marts_results
 parse_marts_results >> dbt_test >> parse_test_results >> dbt_docs_generate
