@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Trigger Airflow DAG
         run: |
-          curl -X POST " https://heterochromatic-unchildishly-marlo.ngrok-free.dev/api/v1/dags/dbt_silver_gold_pipeline/dagRuns" \
+          curl -X POST "https://heterochromatic-unchildishly-marlo.ngrok-free.dev/api/v1/dags/dbt_silver_gold_pipeline/dagRuns" \
           -u github_ci:strongpassword123 \
           -H "Content-Type: application/json" \
           -d '{
