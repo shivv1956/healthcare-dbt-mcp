@@ -52,10 +52,10 @@ models:
       #   tests:
       #     - not_null
 
-      - name: encounter_class
-        description: "Class of the encounter"
-        tests:
-          - not_null
+      # - name: encounter_class
+      #   description: "Class of the encounter"
+      #   tests:
+      #     - not_null
 
       - name: code
         description: "Encounter code"

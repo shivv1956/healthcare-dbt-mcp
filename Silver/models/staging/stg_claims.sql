@@ -75,7 +75,7 @@ validated as (
 
         -- Deduplication
         row_number() over (
-            partition by "{{ validate_uuid('"Id"') }}"
+            partition by {{ validate_uuid('"Id"') }}
             order by LOAD_TIMESTAMP desc
         ) as rn
 
