@@ -6,7 +6,7 @@ models:
     config:
       tags: ['marts', 'dimension', 'patients']
     columns:
-      - name: patient_id
+      - name: patient_key
         description: "Unique patient identifier"
         tests:
           - unique
@@ -21,7 +21,7 @@ models:
     config:
       tags: ['marts', 'fact', 'encounters']
     columns:
-      - name: encounter_id
+      - name: encounter_key
         description: "Unique encounter identifier"
         tests:
           - unique
@@ -38,7 +38,7 @@ models:
     config:
       tags: ['marts', 'fact', 'medications']
     columns:
-      - name: medication_id
+      - name: medication_key
         description: "Unique medication identifier"
         tests:
           - unique
@@ -53,7 +53,7 @@ models:
     config:
       tags: ['marts', 'fact', 'procedures']
     columns:
-      - name: procedure_id
+      - name: procedure_key
         description: "Unique procedure identifier"
         tests:
           - unique
@@ -68,7 +68,7 @@ models:
     config:
       tags: ['marts', 'fact', 'observations']
     columns:
-      - name: observation_id
+      - name: observation_key
         description: "Unique observation identifier"
         tests:
           - unique

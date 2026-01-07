@@ -26,60 +26,43 @@ WITH source AS (
   {% endif %}
 ),
 
--- First get Device resources for UDI and type information
-device_definitions AS (
-  SELECT
-    entry.value:resource:id::STRING as device_id,
-    entry.value:resource:type:coding[0]:code::STRING as code,
-    COALESCE(
-      entry.value:resource:type:coding[0]:display::STRING,
-      entry.value:resource:type:text::STRING
-    ) as description,
-    entry.value:resource:udiCarrier[0]:deviceIdentifier::STRING as udi
-  FROM source,
-  LATERAL FLATTEN(input => source.bundle_data:entry) entry
-  WHERE entry.value:resource:resourceType::STRING = 'Device'
-),
-
--- Then get DeviceUseStatement for patient association and timing
-device_use_resources AS (
+-- Get Device resources directly
+device_resources AS (
   SELECT
     source.file_key,
     source.loaded_at,
     entry.value:resource AS resource
   FROM source,
   LATERAL FLATTEN(input => source.bundle_data:entry) entry
-  WHERE entry.value:resource:resourceType::STRING IN ('DeviceUseStatement', 'DeviceRequest')
+  WHERE entry.value:resource:resourceType::STRING = 'Device'
 ),
 
 flattened AS (
   SELECT
     resource:id::STRING as id,
-    TRY_TO_TIMESTAMP(
-      COALESCE(
-        resource:timingDateTime::STRING,
-        resource:timingPeriod:start::STRING,
-        resource:authoredOn::STRING
-      )
-    ) as "START",
-    TRY_TO_TIMESTAMP(resource:timingPeriod:end::STRING) as "STOP",
-    {{ extract_uuid_from_reference('resource:subject:reference') }} as patient,
-    {{ extract_uuid_from_reference('resource:context:reference') }} as encounter,
     
-    -- Get device details
-    {{ extract_uuid_from_reference('resource:device:reference') }} as device_ref,
+    -- Timing - use manufacturing/expiration dates if available
     COALESCE(
-      resource:device:display::STRING,
-      resource:codeCodeableConcept:coding[0]:code::STRING
-    ) as code,
+      TRY_TO_TIMESTAMP(resource:manufactureDate::STRING),
+      loaded_at
+    ) as "START",
+    TRY_TO_TIMESTAMP(resource:expirationDate::STRING) as "STOP",
+    
+    -- Patient association from Device is indirect - will be resolved in intermediate
+    {{ extract_uuid_from_reference('resource:patient:reference') }} as patient,
+    NULL as encounter,
+    
+    -- Device details
+    resource:type:coding[0]:code::STRING as code,
     COALESCE(
-      resource:device:display::STRING,
-      resource:codeCodeableConcept:coding[0]:display::STRING
+      resource:type:coding[0]:display::STRING,
+      resource:type:text::STRING,
+      resource:deviceName[0]:name::STRING
     ) as description,
-    NULL as udi,  -- Will be joined from device_definitions in intermediate model
+    resource:udiCarrier[0]:deviceIdentifier::STRING as udi,
     
     loaded_at
-  FROM device_use_resources
+  FROM device_resources
 )
 
 SELECT

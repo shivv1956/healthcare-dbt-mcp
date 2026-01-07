@@ -26,43 +26,52 @@ WITH source AS (
   {% endif %}
 ),
 
--- Get Organizations that are insurance payers
-payer_resources AS (
+-- Extract unique payers from ExplanationOfBenefit resources
+eob_resources AS (
   SELECT
     source.file_key,
     source.loaded_at,
-    entry.value:resource AS resource
+    entry.value:resource:insurer:display::STRING as insurer_name,
+    entry.value:resource:insurer:reference::STRING as insurer_ref
   FROM source,
   LATERAL FLATTEN(input => source.bundle_data:entry) entry
-  WHERE entry.value:resource:resourceType::STRING = 'Organization'
-    AND (
-      entry.value:resource:type[0]:coding[0]:code::STRING = 'pay'
-      OR entry.value:resource:type[0]:text::STRING ILIKE '%insurance%'
-      OR entry.value:resource:type[0]:text::STRING ILIKE '%payer%'
-    )
+  WHERE entry.value:resource:resourceType::STRING = 'ExplanationOfBenefit'
+    AND entry.value:resource:insurer:display::STRING IS NOT NULL
+),
+
+-- Get unique payers
+unique_payers AS (
+  SELECT DISTINCT
+    insurer_name,
+    insurer_ref,
+    MAX(loaded_at) as loaded_at
+  FROM eob_resources
+  GROUP BY insurer_name, insurer_ref
 ),
 
 flattened AS (
   SELECT
-    resource:id::STRING as id,
-    resource:name::STRING as name,
+    {{ dbt_utils.generate_surrogate_key(['insurer_name']) }} as id,
+    insurer_name as name,
     
     -- Ownership type (Government vs Private)
     CASE
-      WHEN resource:name::STRING ILIKE '%medicare%' THEN 'Government'
-      WHEN resource:name::STRING ILIKE '%medicaid%' THEN 'Government'
-      WHEN resource:name::STRING ILIKE '%tricare%' THEN 'Government'
+      WHEN insurer_name ILIKE '%medicare%' THEN 'Government'
+      WHEN insurer_name ILIKE '%medicaid%' THEN 'Government'
+      WHEN insurer_name ILIKE '%tricare%' THEN 'Government'
+      WHEN insurer_name ILIKE '%dual eligible%' THEN 'Government'
+      WHEN insurer_name = 'NO_INSURANCE' THEN 'Self-Pay'
       ELSE 'Private'
     END as ownership,
     
-    -- Address
-    resource:address[0]:line[0]::STRING as address,
-    resource:address[0]:city::STRING as city,
-    resource:address[0]:state::STRING as state_headquartered,
-    resource:address[0]:postalCode::STRING as zip,
+    -- Address fields - not available in EOB, using NULL
+    NULL as address,
+    NULL as city,
+    NULL as state_headquartered,
+    NULL as zip,
     
     -- Contact
-    resource:telecom[0]:value::STRING as phone,
+    NULL as phone,
     
     -- Financial metrics - will be calculated in marts from Claims
     0.00 as amount_covered,
@@ -81,7 +90,7 @@ flattened AS (
     0 as member_months,
     
     loaded_at
-  FROM payer_resources
+  FROM unique_payers
 )
 
 SELECT * FROM flattened

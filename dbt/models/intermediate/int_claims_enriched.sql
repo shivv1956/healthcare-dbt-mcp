@@ -27,13 +27,14 @@ encounter_costs AS (
   SELECT
     enc.id as encounter_id,
     enc.patient as patient_id,
-    COALESCE(cs.total_charge, 0.00) as base_encounter_cost,
-    COALESCE(cs.total_charge, 0.00) as total_claim_cost,
-    COALESCE(cs.total_payment, 0.00) as payer_coverage
+    COALESCE(SUM(ct.amount), 0.00) as base_encounter_cost,
+    COALESCE(SUM(ct.amount), 0.00) as total_claim_cost,
+    COALESCE(SUM(ct.payments), 0.00) as payer_coverage
   FROM {{ ref('stg_encounters') }} enc
-  LEFT JOIN claim_summary cs
-    ON enc.id = cs.claimid
-    OR enc.patient = cs.patientid
+  LEFT JOIN {{ ref('stg_claims_transactions') }} ct
+    ON enc.patient = ct.patientid
+    AND DATE(enc."START") = DATE(ct.fromdate)
+  GROUP BY 1, 2
 ),
 
 procedure_costs AS (
