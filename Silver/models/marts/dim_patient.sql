@@ -16,8 +16,6 @@ final as (
         -- Patient demographics
         birth_date,
         death_date,
-        first_name,
-        last_name,
         gender,
         race,
         ethnicity,
@@ -26,7 +24,9 @@ final as (
         -- Address information
         city,
         state,
-        zip_code
+        
+        -- Financial information
+        income
         
     from patients_source
 )
